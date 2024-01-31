@@ -60,3 +60,5 @@ jobs:
             githubactions/deployments.yaml
             githubactions/services.yaml
             githubactions/ingress1.yaml
+          images: 'sushmithad1606/githubactions:${{ github.sha }}'
+          pull-images: false 
