@@ -56,6 +56,6 @@ jobs:
         with:
           namespace: 'default'
           manifests: |
-            deployments.yaml
-            services.yaml
-            ingress1.yaml
+            githubactions/deployments.yaml
+            githubactions/services.yaml
+            githubactions/ingress1.yaml
