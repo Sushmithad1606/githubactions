@@ -31,11 +31,12 @@ jobs:
         id: login
         uses: azure/login@v1.4.3
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - name: Set AKS context
-        id: set-context
-        uses: azure/aks-set-context@v3
-        with:
-          resource-group: '${{ secrets.resource_group }}' 
-          cluster-name: '${{ secrets.cluster_name }}'
+          creds: |
+             {
+        "clientId": "${{ secrets.AZURE_CLIENT_ID }}",
+        "clientSecret": "${{ secrets.AZURE_CLIENT_SECRET }}",
+        "tenantId": "${{ secrets.AZURE_TENANT_ID }}",
+        "subscriptionId": "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
+             }
+      
       
