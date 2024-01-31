@@ -9,6 +9,10 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
+      - name: List files
+        run: |
+          ls -R
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Checkout source code 
@@ -61,8 +65,4 @@ jobs:
             githubactions/services.yaml
             githubactions/ingress1.yaml
           images: 'sushmithad1606/githubactions:${{ github.sha }}'
-          pull-images: false 
-
-      - name: List files
-        run: |
-          ls -R
+          pull-images: false
