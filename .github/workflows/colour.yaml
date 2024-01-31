@@ -62,3 +62,7 @@ jobs:
             githubactions/ingress1.yaml
           images: 'sushmithad1606/githubactions:${{ github.sha }}'
           pull-images: false 
+
+      - name: List files
+        run: |
+          ls -R
