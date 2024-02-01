@@ -9,6 +9,9 @@ on:
       ip:
         description: 'Enter the IP address'
         required: true
+  push:
+    branches:
+      - master
 
 jobs:
   update-dns:
