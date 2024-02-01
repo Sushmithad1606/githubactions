@@ -56,6 +56,6 @@ jobs:
 
       - name: Deploy Helm Chart
         run: |
-          helm upgrade --install blue-app blue-app/
+          helm upgrade --install blue-app blue-app/ --set image.tag=${{ github.sha }}
 
       
