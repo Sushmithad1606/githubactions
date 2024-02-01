@@ -1,9 +1,14 @@
 name: Route 53 DNS
 
 on:
-  push:
-    branches:
-      - master
+  workflow_dispatch:
+    inputs:
+      domain:
+        description: 'Enter the domain name'
+        required: true
+      ip:
+        description: 'Enter the IP address'
+        required: true
 
 jobs:
   update-dns:
