@@ -1,4 +1,4 @@
-name: Update Route 53 DNS
+name: Route 53 DNS
 
 on:
   push:
