@@ -9,9 +9,6 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Print current working directory
-        run: |
-          pwd
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -21,9 +18,6 @@ jobs:
         with:
           fetch-depth: 0  # Ensure all history is included in the checkout
 
-      - name: List files
-        run: |
-          ls -R
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -62,6 +56,6 @@ jobs:
 
       - name: Deploy Helm Chart
         run: |
-          helm upgrade --install blue-app .
+          helm upgrade --install blue-app blue-app/
 
       
