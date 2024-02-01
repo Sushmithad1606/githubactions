@@ -62,6 +62,6 @@ jobs:
 
       - name: Deploy Helm Chart
         run: |
-          helm upgrade --install blueapp .
+          helm upgrade --install blue-app .
 
       
