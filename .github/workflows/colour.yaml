@@ -64,4 +64,8 @@ jobs:
         with:
           version: '3'
 
+      - name: Deploy Helm Chart
+        run: |
+          helm upgrade --install mygit .
+
       
