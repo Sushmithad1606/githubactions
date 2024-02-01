@@ -30,3 +30,25 @@ jobs:
 
       - name: Install AWS CLI
         run: sudo apt-get install -y awscli
+
+      - name: Update Route 53 DNS record
+        run: |
+          aws route53 change-resource-record-sets \
+            --hosted-zone-id "${{ secrets.AWS_HOSTED_ZONE_ID }}" \
+            --change-batch '{
+              "Changes": [
+                {
+                  "Action": "UPSERT",
+                  "ResourceRecordSet": {
+                    "Name": "'"$DOMAIN_NAME"'",
+                    "Type": "A",
+                    "TTL": 300,
+                    "ResourceRecords": [
+                      {
+                        "Value": "'"$IP_ADDRESS"'"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }'
