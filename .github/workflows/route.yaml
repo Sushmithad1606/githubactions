@@ -20,6 +20,7 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
+
       - name: Set variables
         run: |
           DOMAIN_NAME="${{ github.event.inputs.domain }}"
@@ -30,6 +31,12 @@ jobs:
 
       - name: Install AWS CLI
         run: sudo apt-get install -y awscli
+
+      - name: Configure AWS credentials
+        run: |
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws configure set default.region us-east-1  # Replace with your AWS region
 
       - name: Update Route 53 DNS record
         run: |
