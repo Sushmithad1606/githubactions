@@ -9,6 +9,9 @@ on:
       ip:
         description: 'Enter the IP address'
         required: true
+  push:
+    branches:
+      - master # Replace 'main' with your desired branch name
 
 jobs:
   update-dns:
