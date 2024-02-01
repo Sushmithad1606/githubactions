@@ -59,13 +59,9 @@ jobs:
           resource-group: '${{ secrets.resource_group }}' 
           cluster-name: '${{ secrets.cluster_name }}'
 
-      - name: Install Helm
-        uses: azure/setup-helm@v1
-        with:
-          version: '3'
 
       - name: Deploy Helm Chart
         run: |
-          helm upgrade --install mygit .
+          helm upgrade --install blueapp .
 
       
