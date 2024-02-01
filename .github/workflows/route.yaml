@@ -11,7 +11,7 @@ on:
         required: true
   push:
     branches:
-      - master # Replace 'main' with your desired branch name
+      - master
 
 jobs:
   update-dns:
@@ -31,6 +31,8 @@ jobs:
         run: |
           DOMAIN_NAME="${{ github.event.inputs.domain }}"
           IP_ADDRESS="${{ github.event.inputs.ip }}"
+          echo "Domain Name: $DOMAIN_NAME"
+          echo "IP Address: $IP_ADDRESS"
 
       - name: Update Route 53 DNS
         run: |
