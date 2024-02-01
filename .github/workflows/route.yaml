@@ -3,7 +3,7 @@ name: Update Route 53 DNS
 on:
   push:
     branches:
-      - main  
+      - main
 
 jobs:
   update-dns:
@@ -48,4 +48,3 @@ jobs:
                 }
               ]
             }'
-
