@@ -1,0 +1,19 @@
+name: Update Route 53 DNS
+
+on:
+  workflow_run:
+    workflows: ["Manual Workflow"]
+    types:
+      - requested
+
+jobs:
+  update-dns:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      - name: Install AWS CLI
+        run: |
+          sudo apt-get install -y awscli
