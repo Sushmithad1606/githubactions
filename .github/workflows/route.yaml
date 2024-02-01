@@ -25,6 +25,7 @@ jobs:
         run: |
           DOMAIN_NAME="${{ github.event.inputs.domain }}"
           IP_ADDRESS="${{ github.event.inputs.ip }}"
+          echo "Domain Name: $DOMAIN_NAME"  # Add this line to print the domain name
 
       - name: Update package information
         run: sudo apt-get update
@@ -37,6 +38,9 @@ jobs:
           aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws configure set default.region us-east-1
+
+      - name: Print Domain Name
+        run: echo "Domain Name: $DOMAIN_NAME"
 
       - name: Update Route 53 DNS record
         run: |
