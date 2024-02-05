@@ -35,14 +35,14 @@ jobs:
 
       - name: Deploy to Route 53
         run: |
-          # Extracting inputs
+    
           domainName="${{ github.event.inputs.domain }}"
           ipAddress="${{ github.event.inputs.ip_address }}"
 
-          # Replace these values with your actual values
+          
           hostedZoneId="Z02897501GXNUDB882ENV"
 
-          # Update A record
+          
           aws route53 change-resource-record-sets \
             --hosted-zone-id $hostedZoneId \
             --change-batch "{
