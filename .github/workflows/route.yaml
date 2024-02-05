@@ -26,7 +26,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: your-aws-region
+          aws-region: us-east-1
 
       - name: Deploy to Route 53
         run: |
@@ -35,7 +35,7 @@ jobs:
           ipAddress="${{ github.event.inputs.ip_address }}"
 
           # Replace these values with your actual values
-          hostedZoneId="YOUR_HOSTED_ZONE_ID"
+          hostedZoneId="Z02897501GXNUDB882ENV"
 
           # Update A record
           aws route53 change-resource-record-sets \
