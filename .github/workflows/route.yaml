@@ -28,6 +28,11 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
+      - name: Debug Output
+        run: |
+          echo "Domain Name: ${{ github.event.inputs.domain }}"
+          echo "IP Address: ${{ github.event.inputs.ip_address }}"
+
       - name: Deploy to Route 53
         run: |
           # Extracting inputs
