@@ -1,22 +1,52 @@
-name: Update Route 53 DNS
+name: Deploy to Route 53
 
 on:
-  push:
-    branches:
-      - master
+  workflow_dispatch:
+    inputs:
+      domain:
+        description: 'Domain name to update'
+        required: true
+      ip_address:
+        description: 'IP address to set for the A record'
+        required: true
 
 jobs:
-  aws_route53:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: "Create an A record set"
-        uses: Roosterfish/aws-route53-record-set-action@master
-        with: 
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_route53_hosted_zone_id: ${{ secrets.AWS_ROUTE53_HOSTED_ZONE_ID }}
-          aws_route53_rr_action: "CREATE"
-          aws_route53_rr_name: "practise-02.kubeace.com"
-          aws_route53_rr_type: "A"
-          aws_route53_rr_ttl: "300"
-          aws_route53_rr_value: "20.233.101.16"
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: your-aws-region
+
+      - name: Deploy to Route 53
+        run: |
+          # Extracting inputs
+          domainName="${{ github.event.inputs.domain }}"
+          ipAddress="${{ github.event.inputs.ip_address }}"
+
+          # Replace these values with your actual values
+          hostedZoneId="YOUR_HOSTED_ZONE_ID"
+
+          # Update A record
+          aws route53 change-resource-record-sets \
+            --hosted-zone-id $hostedZoneId \
+            --change-batch "{
+              \"Changes\": [{
+                \"Action\": \"UPSERT\",
+                \"ResourceRecordSet\": {
+                  \"Name\": \"$domainName\",
+                  \"Type\": \"A\",
+                  \"TTL\": 300,
+                  \"ResourceRecords\": [{\"Value\": \"$ipAddress\"}]
+                }
+              }]
+            }"
+
+          echo "DNS records updated successfully"
